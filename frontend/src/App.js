@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Trash2, CheckCircle2, Circle, Zap, TrendingUp, Sparkles, Loader } from "lucide-react";
 import clsx from "clsx";
 
+// API configuration - use environment variable or fallback to localhost
+const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
+
 function SkeletonLoader() {
   return (
     <div className="space-y-3">
@@ -28,7 +31,7 @@ function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/tasks")
+    fetch(`${API_URL}/tasks`)
       .then(res => res.json())
       .then(data => {
         setTasks(data);
@@ -51,7 +54,7 @@ function App() {
 
     setIsAdding(true);
     try {
-      const res = await fetch("http://127.0.0.1:5000/tasks", {
+      const res = await fetch(`${API_URL}/tasks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title })
@@ -65,7 +68,7 @@ function App() {
   };
 
   const toggleTask = (task) => {
-    fetch(`http://127.0.0.1:5000/tasks/${task.id}`, { method: "PUT" })
+    fetch(`${API_URL}/tasks/${task.id}`, { method: "PUT" })
       .then(res => res.json())
       .then(updated => {
         setTasks(tasks.map(t => t.id === updated.id ? updated : t));
@@ -74,7 +77,7 @@ function App() {
   };
 
   const deleteTask = (taskId) => {
-    fetch(`http://127.0.0.1:5000/tasks/${taskId}`, { method: "DELETE" })
+    fetch(`${API_URL}/tasks/${taskId}`, { method: "DELETE" })
       .then(() => {
         const deleted = tasks.find(t => t.id === taskId);
         setTasks(tasks.filter(t => t.id !== taskId));
