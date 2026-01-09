@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
+/* Sohne - Premium luxury font from Grotesk */
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/dm-serif-display@5/index.min.css');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .fancy-title {
-  font-family: 'Playfair Display', serif;
-  font-weight: 800;
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
   letter-spacing: -0.02em;
 }
 

@@ -488,7 +488,7 @@ function App() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-teal-400 to-cyan-400" />
+              <div className="text-2xl">✦</div>
               <h1 className="text-xl font-bold text-teal-400 fancy-title">TaskFlow</h1>
             </div>
 
@@ -723,7 +723,17 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               className="text-center py-16"
             >
-              <div className="text-6xl mb-4">😴</div>
+              <svg
+                className="w-20 h-20 mx-auto mb-4 opacity-60"
+                viewBox="0 0 100 100"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M50 10C30 10 15 20 15 35C15 45 20 55 30 60L25 75C25 78 28 80 31 78L45 68C47 68 48 68 50 68C52 68 53 68 55 68L69 78C72 80 75 78 75 75L70 60C80 55 85 45 85 35C85 20 70 10 50 10Z" fill="currentColor" className={lightMode ? 'text-slate-400' : 'text-slate-600'} />
+                <circle cx="35" cy="35" r="3" fill="white" />
+                <circle cx="65" cy="35" r="3" fill="white" />
+                <path d="M40 45Q50 50 60 45" stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" />
+              </svg>
               <p className={clsx("font-light text-lg", secondaryText)}>
                 No tasks yet. Create one to get started.
               </p>
