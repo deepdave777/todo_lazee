@@ -18,9 +18,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
+  background: linear-gradient(135deg, #0d1117 0%, #010409 50%, #0a0e27 100%);
+  background-attachment: fixed;
   min-height: 100vh;
-  color: #f1f5f9;
+  color: #e1e4e8;
 }
 
 code {
@@ -35,15 +36,28 @@ code {
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(13, 17, 23, 0.5);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f97316;
-  border-radius: 10px;
+  background: linear-gradient(180deg, #32b8c6 0%, #0d9488 100%);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ea580c;
+  background: linear-gradient(180deg, #5eead4 0%, #14b8a6 100%);
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(13, 17, 23, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(50, 184, 198, 0.15);
+}
+
+.glass-lg {
+  background: rgba(13, 17, 23, 0.5);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(50, 184, 198, 0.2);
 }
 
