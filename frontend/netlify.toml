@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[functions]
+  directory = "functions"
+  included_files = ["package-lock.json", "node_modules/**/*"]
+
+[context.production]
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[env]
+  REACT_APP_API_URL = "https://todo-api.herokuapp.com"
