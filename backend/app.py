@@ -65,11 +65,16 @@ def add_task():
     if len(title) > 500:
         return jsonify({"error": "Title is too long (max 500 characters)"}), 400
     
+    priority = data.get("priority", "medium").lower()
+    if priority not in ["low", "medium", "high"]:
+        priority = "medium"
+    
     tasks = load_tasks()
     task = {
         "id": get_next_id(tasks),
         "title": title,
         "completed": False,
+        "priority": priority,
         "created_at": datetime.now().isoformat()
     }
     tasks.append(task)
@@ -79,14 +84,33 @@ def add_task():
 
 @app.route("/tasks/<int:task_id>", methods=["PUT"])
 def complete_task(task_id):
-    """Mark a task as completed."""
+    """Mark a task as completed or update task details."""
+    data = request.get_json() or {}
     tasks = load_tasks()
     task = next((t for t in tasks if t["id"] == task_id), None)
     
     if not task:
         return jsonify({"error": "Task not found"}), 404
     
-    task["completed"] = not task.get("completed", False)  # Toggle completion
+    # If title is provided, update it
+    if "title" in data:
+        title = str(data["title"]).strip()
+        if not title:
+            return jsonify({"error": "Title cannot be empty"}), 400
+        if len(title) > 500:
+            return jsonify({"error": "Title is too long (max 500 characters)"}), 400
+        task["title"] = title
+    
+    # If priority is provided, update it
+    if "priority" in data:
+        priority = str(data["priority"]).lower()
+        if priority in ["low", "medium", "high"]:
+            task["priority"] = priority
+    
+    # If no data provided (toggle completion)
+    if not data:
+        task["completed"] = not task.get("completed", False)
+    
     task["updated_at"] = datetime.now().isoformat()
     save_tasks(tasks)
     return jsonify(task)

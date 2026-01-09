@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.fancy-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
 
 * {
   margin: 0;
@@ -13,22 +22,29 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #0d1117;
-  color: #e1e4e8;
   overflow-x: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Light mode */
+body.light-mode {
+  background: #ffffff;
+  color: #1a1a1a;
 }
 
-/* Custom scrollbar */
+/* Dark mode (default) */
+body {
+  background: #0d1117;
+  color: #e1e4e8;
+}
+
+code {
+  font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Custom scrollbar - Dark */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -46,5 +62,19 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: #5eead4;
 }
+
+/* Light mode scrollbar */
+body.light-mode ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+body.light-mode ::-webkit-scrollbar-thumb {
+  background: #32b8c6;
+}
+
+body.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: #0f766e;
+}
+
 
 
