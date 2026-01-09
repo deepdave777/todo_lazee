@@ -75,29 +75,10 @@ function FancySwitch({ enabled, onChange, darkMode }) {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={onChange}
-      className={clsx(
-        "relative inline-flex items-center h-8 w-14 rounded-full transition-all duration-300",
-        enabled
-          ? darkMode ? 'bg-slate-700 shadow-lg shadow-amber-400/20' : 'bg-amber-200 shadow-lg shadow-amber-400/20'
-          : darkMode ? 'bg-slate-800 shadow-lg shadow-indigo-400/20' : 'bg-slate-300 shadow-lg shadow-indigo-400/20'
-      )}
+      className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-slate-800/30 transition-all duration-300"
     >
-      <motion.div
-        animate={{ x: enabled ? 28 : 4 }}
-        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-        className={clsx(
-          "w-6 h-6 rounded-full transition-colors flex items-center justify-center",
-          enabled
-            ? darkMode ? 'bg-white' : 'bg-white'
-            : darkMode ? 'bg-indigo-400' : 'bg-slate-100'
-        )}
-      >
-        {enabled ? (
-          <Sun className="w-4 h-4 text-amber-500" />
-        ) : (
-          <Moon className="w-4 h-4 text-indigo-600" />
-        )}
-      </motion.div>
+      <Moon className={clsx("w-5 h-5 transition-colors", enabled ? 'text-slate-500' : 'text-teal-400')} />
+      <Sun className={clsx("w-5 h-5 transition-colors", enabled ? 'text-amber-400' : 'text-slate-500')} />
     </motion.button>
   );
 }
@@ -484,37 +465,40 @@ function App() {
           WebkitBackdropFilter: 'blur(20px)'
         }}
       >
-        <div className="max-w-4xl mx-auto px-4 py-4 sm:py-5">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center gap-3">
-              <div className="text-2xl">✦</div>
-              <h1 className="text-xl font-bold text-teal-400 fancy-title">TaskFlow</h1>
+        <div className="max-w-7xl mx-auto px-4 py-4 sm:py-5">
+          <div className="flex items-center justify-between gap-6">
+            {/* Left side - Logo and Stats */}
+            <div className="flex items-center gap-8 flex-1">
+              {/* Logo */}
+              <div className="flex items-center gap-3 flex-shrink-0">
+                <div className="text-2xl">✦</div>
+                <h1 className="text-xl font-bold text-teal-400 fancy-title">TaskFlow</h1>
+              </div>
+
+              {/* Stats */}
+              <div className="hidden sm:flex items-center gap-6">
+                <div className="text-center">
+                  <p className={clsx("text-xs font-medium", secondaryText)}>Progress</p>
+                  <motion.p
+                    key={completionPercentage}
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    className="text-lg font-bold text-teal-300"
+                  >
+                    {completionPercentage}%
+                  </motion.p>
+                </div>
+                <div className={clsx("w-px h-8", lightMode ? 'bg-teal-500/30' : 'bg-teal-500/20')} />
+                <div className="text-center">
+                  <p className={clsx("text-xs font-medium", secondaryText)}>
+                    {openTasks.length === 0 ? 'None added' : `${completedCount}/${tasks.length}`}
+                  </p>
+                  <p className="text-lg font-bold text-teal-300">Done</p>
+                </div>
+              </div>
             </div>
 
-            {/* Stats */}
-            <div className="hidden sm:flex items-center gap-6">
-              <div className="text-center">
-                <p className={clsx("text-xs font-medium", secondaryText)}>Progress</p>
-                <motion.p
-                  key={completionPercentage}
-                  initial={{ scale: 1.1 }}
-                  animate={{ scale: 1 }}
-                  className="text-lg font-bold text-teal-300"
-                >
-                  {completionPercentage}%
-                </motion.p>
-              </div>
-              <div className={clsx("w-px h-8", lightMode ? 'bg-teal-500/30' : 'bg-teal-500/20')} />
-              <div className="text-center">
-                <p className={clsx("text-xs font-medium", secondaryText)}>
-                  {openTasks.length === 0 ? 'None added' : `${completedCount}/${tasks.length}`}
-                </p>
-                <p className="text-lg font-bold text-teal-300">Done</p>
-              </div>
-            </div>
-
-            {/* Theme toggle */}
+            {/* Right side - Theme toggle */}
             <FancySwitch
               enabled={lightMode}
               onChange={() => setLightMode(!lightMode)}
